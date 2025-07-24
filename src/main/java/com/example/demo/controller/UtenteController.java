@@ -7,8 +7,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.example.demo.dto.UtenteCreateDto;
 import com.example.demo.dto.UtenteDto;
+import com.example.demo.mapper.UtenteMapper;
 import com.example.demo.model.Utente;
 import com.example.demo.service.UtenteService;
 
@@ -18,7 +18,6 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PutMapping;
 
 //test
-
 @RestController
 @RequestMapping("/api")
 public class UtenteController {
@@ -27,39 +26,34 @@ public class UtenteController {
     private UtenteService utenteService;
 
     @GetMapping("/utente/{id}")
-    public ResponseEntity<UtenteDto> getUtente(@PathVariable Long id) {
+    public UtenteDto getUtente(@PathVariable Long id) {
 
         Utente utente = utenteService.getUtente(id);
-        UtenteDto dto = new UtenteDto();
 
-        if (utente == null) {
-
-            return ResponseEntity.notFound().build(); 
-        }
-
-        return ResponseEntity.ok(dto);
+        return UtenteMapper.utenteDto(utente);
     }
 
     @PostMapping("/utente")
-    public ResponseEntity<Utente> creaUtente(@RequestBody UtenteCreateDto utente) {
+    public UtenteDto creaUtente(@RequestBody UtenteDto utente) {
 
-        Utente entita = new Utente();
-        
-        entita.setNome(utente.getNome());
-        entita.setCognome(utente.getCognome());
+        Utente entita = UtenteMapper.utenteDtoToUtente(utente);
+        Utente entitaSave = utenteService.creaUtente(entita);
 
-        return ResponseEntity.ok(utenteService.creaUtente(entita));
+        return UtenteMapper.utenteDto(entitaSave);
     }
 
     @PutMapping("utente/{id}")
-    public ResponseEntity<Utente> putUtente(@PathVariable Long id, @RequestBody UtenteCreateDto utente) {
+    public ResponseEntity<UtenteDto> putUtente(@PathVariable Long id, @RequestBody UtenteDto utenteDto) {
 
-        Utente entita = new Utente();
+        Utente entita = UtenteMapper.utenteDtoToUtente(utenteDto);
+        Utente aggiornato = utenteService.putUtente(id, entita);
 
-        entita.setNome(utente.getNome());
-        entita.setCognome(utente.getCognome());
+        if (aggiornato == null) {
 
-        return ResponseEntity.ok(utenteService.putUtente(id, entita));
+            return ResponseEntity.notFound().build();
+        }
+
+        return ResponseEntity.ok(UtenteMapper.utenteDto(aggiornato));
     }
 
     @DeleteMapping("utente/{id}")
