@@ -17,6 +17,7 @@ public interface UtenteMapperNew {
     
     @Mapping(target = "id", source = "identificativo")
     @Mapping(target = "nome", source = "nominativo")
+    // @Mapping(target = "cognome", ignore = true)
     Utente utenteModDtoToUtente(UtenteModDto utenteModDto);
 
     //Entity -> Dto

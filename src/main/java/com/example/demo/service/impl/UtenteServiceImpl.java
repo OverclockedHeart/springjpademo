@@ -2,7 +2,8 @@ package com.example.demo.service.impl;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-// import com.example.demo.controller.UtenteController;
+
+import com.example.demo.exception.UtenteNonTrovato;
 import com.example.demo.model.Utente;
 import com.example.demo.repository.UtenteRepository;
 import com.example.demo.service.UtenteService;
@@ -28,7 +29,7 @@ public class UtenteServiceImpl implements UtenteService {
     @Override
     public Utente getUtente(Long id){
 
-        return utenteRepository.findById(id).orElse(null);
+        return utenteRepository.findById(id).orElseThrow(() -> new UtenteNonTrovato(id));
     }
 
     @Override
