@@ -1,38 +1,19 @@
 package com.example.demo.dto;
 
+import jakarta.validation.constraints.NotBlank;
+import lombok.*;
+
+@Setter
+@Getter
+@AllArgsConstructor
+@RequiredArgsConstructor
 public class UtenteCreateDto {
 
+    @NotBlank(message = "Il nome non può essere vuoto")
     private String nome;
+
+    @NotBlank(message = "Il cognome non può essere vuoto")
     private String cognome;
     
-    public UtenteCreateDto() {}
-
-    public UtenteCreateDto(String nome, String cognome) {
-        this.nome = nome;
-        this.cognome = cognome;
-
-    }
-
-    //Getter
-    public String getNome() {
-   
-        return nome;
-    }
-    
-    public String getCognome() {
-        
-        return cognome;
-    }
-
-    //Setter
-    public void setNome(String nome) {
-        this.nome = nome;
-
-    }
-
-    public void setCognome(String cognome) {
-        this.cognome = cognome;
-
-    }
 }
 

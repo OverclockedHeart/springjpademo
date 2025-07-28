@@ -1,8 +1,12 @@
 package com.example.demo.dto;
 
+import jakarta.validation.constraints.NotBlank;
+
 public class UtenteModDto {
     
     private Long identificativo;
+    
+    @NotBlank(message = "Il nome non può essere vuoto")
     private String nominativo;
 
     public UtenteModDto(){}

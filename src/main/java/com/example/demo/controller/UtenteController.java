@@ -1,6 +1,6 @@
 package com.example.demo.controller;
 
-import org.springframework.beans.factory.annotation.Autowired;
+// import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -13,6 +13,10 @@ import com.example.demo.dto.UtenteModDto;
 import com.example.demo.mapper.UtenteMapperNew;
 import com.example.demo.model.Utente;
 import com.example.demo.service.UtenteService;
+
+import jakarta.validation.Valid;
+import lombok.RequiredArgsConstructor;
+
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -20,13 +24,19 @@ import org.springframework.web.bind.annotation.PutMapping;
 
 @RestController
 @RequestMapping("/api")
+@RequiredArgsConstructor
 public class UtenteController {
 
-    @Autowired
-    private UtenteMapperNew utenteMapper;
+   // @Autowired
+    private final UtenteMapperNew utenteMapper;
 
-    @Autowired
-    private UtenteService utenteService;
+    //@Autowired
+    private final UtenteService utenteService;
+
+    // public UtenteController(UtenteMapperNew utenteMapper, UtenteService utenteService) {
+    //     this.utenteMapper = utenteMapper;
+    //     this.utenteService = utenteService;
+    // }
 
     @GetMapping("/utente/{id}")
     public ResponseEntity<UtenteModDto> getUtente(@PathVariable Long id) {
@@ -42,7 +52,7 @@ public class UtenteController {
     }
 
     @PostMapping("/utente")
-    public UtenteDto creaUtente(@RequestBody UtenteCreateDto utente) {
+    public UtenteDto creaUtente(@Valid @RequestBody UtenteCreateDto utente) {
 
         Utente entita = utenteMapper.utenteCreateDtoToUtente(utente);
         Utente entitaSave = utenteService.creaUtente(entita);
@@ -51,7 +61,7 @@ public class UtenteController {
     }
 
     @PutMapping("utente/{id}")
-    public ResponseEntity<UtenteDto> putUtente(@PathVariable Long id, @RequestBody UtenteDto utenteDto) {
+    public ResponseEntity<UtenteDto> putUtente(@PathVariable Long id, @Valid @RequestBody UtenteDto utenteDto) {
 
         Utente entita = utenteMapper.utenteDtoUtente(utenteDto);
         Utente aggiornato = utenteService.putUtente(id, entita);

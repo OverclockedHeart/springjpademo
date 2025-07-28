@@ -1,59 +1,60 @@
-package com.example.demo.mapper;
+// package com.example.demo.mapper;
 
-import com.example.demo.dto.UtenteCreateDto;
-import com.example.demo.dto.UtenteDto;
-import com.example.demo.model.Utente;
+// import com.example.demo.dto.UtenteCreateDto;
+// import com.example.demo.dto.UtenteDto;
+// import com.example.demo.model.Utente;
 
-public class UtenteMapper {
+// public class UtenteMapper {
     
-    public static UtenteDto utenteDto(Utente utente){
+//     public static UtenteDto utenteDto(Utente utente){
 
-        if(utente != null){
+//         if(utente != null){
 
-            return new UtenteDto(
-                utente.getId()
+//             return new UtenteDto(
+//                 utente.getId()
 
-            );
-        }
+//             );
+//         }
 
-        return null;
-    }
+//         return null;
+//     }
 
-    public static UtenteCreateDto creaUtenteDto(Utente utente){
+//     public static UtenteCreateDto creaUtenteDto(Utente utente){
         
-        if(utente == null) return null;
+//         if(utente == null) return null;
         
-        return new UtenteCreateDto(
-            utente.getNome(),
-            utente.getCognome()
+//         return new UtenteCreateDto(
+//             utente.getNome(),
+//             utente.getCognome()
 
-        );
-    }
+//         );
+//     }
 
-    public static Utente utenteDtoToUtente(UtenteDto utenteDto){
+//     public static Utente utenteDtoToUtente(UtenteDto utenteDto){
 
-        if(utenteDto != null){
+//         if(utenteDto != null){
 
-            Utente utente = new Utente();
-            utente.setId(utenteDto.getId());
+//             Utente utente = new Utente();
+//             utente.setId(utenteDto.getId());
 
-            return utente;
-        }
+//             return utente;
+//         }
 
-        return null;
-    }
-    // from utenteCreateDto to Utente model
-    public static Utente utenteCreateDtoToUtente(Utente entitaSave){
+//         return null;
+//     }
 
-        if(entitaSave != null){
+//     // from utenteCreateDto to Utente model
+//     public static Utente utenteCreateDtoToUtente(Utente entitaSave){
 
-            Utente utente = new Utente();
-            utente.setNome(entitaSave.getNome());
-            utente.setCognome(entitaSave.getCognome());
+//         if(entitaSave != null){
 
-            return utente;
-        }
+//             Utente utente = new Utente();
+//             utente.setNome(entitaSave.getNome());
+//             utente.setCognome(entitaSave.getCognome());
 
-        return null;
-    }
-}
+//             return utente;
+//         }
+
+//         return null;
+//     }
+// }
