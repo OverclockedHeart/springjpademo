@@ -8,5 +8,9 @@ added start base project
 v1.1
 added db and repository
 
-v1.2 (latest)
+v1.2
 added dto
+
+v1.3 (latest)
+added and debug validation
+added 'Ruolo' entity
